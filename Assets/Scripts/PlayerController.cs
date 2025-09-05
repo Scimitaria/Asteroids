@@ -8,16 +8,17 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
 
     [SerializeField]
-    public float speed;
+    public float speed = 2;
     public float rotationSpeed = 75f;
     public bool isBoosting = false;
+    private Vector2 startPosition;
 
 
     //runs once at start
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        transform.Find("");
+        startPosition = transform.position;
     }
     void FixedUpdate()
     {
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
         //transform.Translate(Vector2.up * speed * Time.deltaTime); 
         //if(isBoosting)rb.linearVelocity = transform.up * speed;
-        if (isBoosting) rb.AddForce(transform.up * speed);
+        if(isBoosting) rb.AddForce(transform.up * speed);
     }
 
     void OnRotate(InputValue value)
@@ -44,7 +45,8 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Asteroid"))
+        //Debug.Log("Triggered by: " + collision.name);
+        if (collision.name == "Asteroid(Clone)")
         {
             Respawn();
         }
@@ -52,7 +54,8 @@ public class PlayerController : MonoBehaviour
 
     void Respawn()
     {
-        transform.position = Vector2.zero;
+        transform.position = startPosition;
         rb.linearVelocity = Vector2.zero;
+        isBoosting = false;
     }
 }
