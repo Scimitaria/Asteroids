@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     {
         //transform.Rotate(-Vector3.forward * rotationSpeed * turn * Time.deltaTime);
         rb.SetRotation(rb.rotation - (rotationSpeed * Time.deltaTime * turn));
+
         //transform.Translate(Vector2.up * speed * Time.deltaTime); 
         //if(isBoosting)rb.linearVelocity = transform.up * speed;
         if (isBoosting) rb.AddForce(transform.up * speed);

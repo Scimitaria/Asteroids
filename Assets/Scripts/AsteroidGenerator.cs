@@ -15,13 +15,15 @@ public class AsteroidGenerator : MonoBehaviour{
 
     Vector2 EdgePosition(){
         System.Random random = new System.Random();
-        int width = Screen.width;
-        int height = Screen.height;
+        Vector2 lowerLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
+        Vector2 upperRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width,Screen.height,0));
+        float width = upperRight.x - lowerLeft.x;
+        float height = upperRight.y - lowerLeft.y;
         switch (random.Next(4)){
-            case 0: return new Vector2(random.Next(1, 3), random.Next(1, height));
-            case 1: return new Vector2(random.Next(width - 3, width), random.Next(1, height));
-            case 2: return new Vector2(random.Next(1, width), random.Next(1, 3));
-            case 3: return new Vector2(random.Next(1, width), random.Next(height-3, height));
+            case 0: return new Vector2(Random.Range(1, 3)-width/2, Random.Range(1, height)-height/2);
+            case 1: return new Vector2(Random.Range(width - 3, width)-width/2, Random.Range(1, height)-height/2);
+            case 2: return new Vector2(Random.Range(1, width)-width/2, Random.Range(1, 3)-height/2);
+            case 3: return new Vector2(Random.Range(1, width)-width/2, Random.Range(height-3, height)-height/2);
             default:
                 Debug.Log("Error: spawn position out of bounds");
                 return new Vector2(1, 1);
