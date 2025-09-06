@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -6,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public float turn;
     Rigidbody2D rb;
+    public GameObject bulletPrefab;
 
     [SerializeField]
     public float speed = 2;
@@ -42,14 +44,16 @@ public class PlayerController : MonoBehaviour
         if (value.isPressed) isBoosting = true;
         else isBoosting = false;
     }
-
+    void OnFire(InputValue value){
+        if (value.isPressed){
+            GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
+        }
+    }
+        
     void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Triggered by: " + collision.name);
-        if (collision.name == "Asteroid(Clone)")
-        {
-            Respawn();
-        }
+        if (collision.name == "Asteroid(Clone)")Respawn();
     }
 
     void Respawn()

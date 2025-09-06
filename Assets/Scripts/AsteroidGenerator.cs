@@ -4,8 +4,6 @@ using UnityEngine;
 public class AsteroidGenerator : MonoBehaviour{
     private static WaitForSeconds _waitForSeconds1 = new WaitForSeconds(1f);
     public GameObject asteroidPrefab;
-    public Vector2 spawnStart;
-    public float spawnDistance;
     public int numOfAsteroids;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start(){
