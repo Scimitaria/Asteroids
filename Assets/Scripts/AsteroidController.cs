@@ -12,17 +12,21 @@ public class AsteroidController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         speed = Random.Range(1, 5);
-        randomDirection = Random.insideUnitCircle.normalized;
+        //randomDirection = Random.insideUnitCircle.normalized;
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.linearVelocity = randomDirection * 5;
+        rb.linearVelocity = transform.up * 5;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Bullet(Clone)")Destroy(gameObject);
+        if (collision.name == "Bullet(Clone)") Destroy(gameObject);
+    }
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 }

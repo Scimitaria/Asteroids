@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float turn;
     Rigidbody2D rb;
     public GameObject bulletPrefab;
+    private static Transform flame;
 
     [SerializeField]
     public float speed = 2;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
+        flame = transform.Find("flame");
     }
     void FixedUpdate()
     {
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
         //transform.Translate(Vector2.up * speed * Time.deltaTime); 
         //if(isBoosting)rb.linearVelocity = transform.up * speed;
         if(isBoosting) rb.AddForce(transform.up * speed);
+        flame.gameObject.SetActive(isBoosting);
     }
 
     void OnRotate(InputValue value)
@@ -41,19 +44,20 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue value)
     {
         //Debug.Log("moving");
-        if (value.isPressed) isBoosting = true;
-        else isBoosting = false;
+        isBoosting = value.isPressed;
     }
-    void OnFire(InputValue value){
-        if (value.isPressed){
+    void OnFire(InputValue value)
+    {
+        if (value.isPressed)
+        {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
         }
     }
-        
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Triggered by: " + collision.name);
-        if (collision.name == "Asteroid(Clone)")Respawn();
+        if (collision.name == "Asteroid(Clone)") Respawn();
     }
 
     void Respawn()
@@ -61,5 +65,9 @@ public class PlayerController : MonoBehaviour
         transform.position = startPosition;
         rb.linearVelocity = Vector2.zero;
         isBoosting = false;
+    }
+    void OnBecameInvisible()
+    {
+        Respawn();
     }
 }

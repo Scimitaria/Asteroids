@@ -19,6 +19,10 @@ public class BulletController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.name == "Asteroid(Clone)")Destroy(gameObject);
+        if (collision.name == "Asteroid(Clone)") Destroy(gameObject);
     }
+    void OnBecameInvisible()
+        {
+            Destroy(gameObject);
+        }
 }
