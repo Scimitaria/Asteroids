@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     public GameObject bulletPrefab;
     private static Transform flame;
+    private int bulletCount;
 
     [SerializeField]
     public float speed = 2;
@@ -28,10 +29,11 @@ public class PlayerController : MonoBehaviour
     {
         //transform.Rotate(-Vector3.forward * rotationSpeed * turn * Time.deltaTime);
         rb.SetRotation(rb.rotation - (rotationSpeed * Time.deltaTime * turn));
+        bulletCount = GameObject.FindGameObjectsWithTag("Bullet").Length;
 
         //transform.Translate(Vector2.up * speed * Time.deltaTime); 
         //if(isBoosting)rb.linearVelocity = transform.up * speed;
-        if(isBoosting) rb.AddForce(transform.up * speed);
+        if (isBoosting) rb.AddForce(transform.up * speed);
         flame.gameObject.SetActive(isBoosting);
     }
 
@@ -48,7 +50,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnFire(InputValue value)
     {
-        if (value.isPressed)
+        if (value.isPressed && bulletCount<5)
         {
             GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
         }
@@ -57,7 +59,7 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Triggered by: " + collision.name);
-        if (collision.name == "Asteroid(Clone)") Respawn();
+        if(collision.gameObject.CompareTag("Asteroid"))Respawn();
     }
 
     void Respawn()

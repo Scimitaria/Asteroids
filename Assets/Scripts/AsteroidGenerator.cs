@@ -7,7 +7,7 @@ public class AsteroidGenerator : MonoBehaviour{
     private static float width,height,centerX,centerY,spawnDistance;
     private static WaitForSeconds _waitForSeconds1 = new WaitForSeconds(1f);
     [SerializeField]
-    public GameObject asteroidPrefab;
+    public GameObject[] asteroidPrefabs;
     //public int numOfAsteroids;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -49,7 +49,7 @@ switch (random.Next(4)){
             toCenter = (Vector2.zero - (Vector2)spawnPosition).normalized;
             angle = Mathf.Atan2(toCenter.y, toCenter.x) * Mathf.Rad2Deg - 90f + Random.Range(-45f, 45f);
             rotation = Quaternion.Euler(0, 0, angle);
-            Instantiate(asteroidPrefab, spawnPosition, rotation);
+            Instantiate(asteroidPrefabs[Random.Range(0,asteroidPrefabs.Length-1)], spawnPosition, rotation);
             yield return _waitForSeconds1;
         }
     }
