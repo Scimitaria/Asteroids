@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     private int bulletCount;
 
     [SerializeField]
-    public float speed = 2;
-    public float rotationSpeed = 75f;
+    public float speed = 3;
+    public float rotationSpeed = 150f;
     public bool isBoosting = false;
     private Vector2 startPosition;
 

@@ -781,8 +781,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   turn: 0
   bulletPrefab: {fileID: 66993077191448475, guid: 13c1b5ee790b34bc2824faac73445c0a, type: 3}
-  speed: 2
-  rotationSpeed: 75
+  speed: 3
+  rotationSpeed: 100
   isBoosting: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

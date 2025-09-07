@@ -105,8 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc28f428c55f4053a3184f4ea911c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AsteroidController
-  speed: 0
+  speed: 4
   randomDirection: {x: 0, y: 0}
+  asteroidChild: {fileID: 0}
 --- !u!61 &1800042288071106804
 BoxCollider2D:
   m_ObjectHideFlags: 0
