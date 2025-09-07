@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -712631045867808456, guid: b670ab75dde984907b8570040daa08c5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6132076, g: 0.53511035, b: 0.53511035, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -105,8 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc28f428c55f4053a3184f4ea911c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AsteroidController
-  speed: 4
-  randomDirection: {x: 0, y: 0}
   asteroidChild: {fileID: 0}
 --- !u!61 &1800042288071106804
 BoxCollider2D:

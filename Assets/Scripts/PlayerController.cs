@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private static Transform flame;
     private int bulletCount;
     private ScoreManager scoreManager;
+    private LivesManager livesManager;
 
     [SerializeField]
     public float speed = 3;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
         startPosition = transform.position;
         flame = transform.Find("flame");
         scoreManager = FindFirstObjectByType<ScoreManager>();
+        livesManager = FindFirstObjectByType<LivesManager>();
     }
     void FixedUpdate()
     {
@@ -66,6 +69,8 @@ public class PlayerController : MonoBehaviour
 
     void Respawn()
     {
+        livesManager.AddLife(-1);
+        if (livesManager.lives < 0) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
         int score = scoreManager.score;
         scoreManager.AddScore(-(score/5));
         transform.position = startPosition;
