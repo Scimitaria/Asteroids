@@ -22,29 +22,34 @@ public class AsteroidController : MonoBehaviour
         rb.linearVelocity = transform.up * 5;
     }
 
+    void spawnChildren() {
+        Vector3 position = transform.position;
+        Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
+        //HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA
+        foreach (int e in new List<int>() { 0, 0 })
+        {
+            rotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+            Instantiate(asteroidChild, position, rotation);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name == "Bullet(Clone)"){
-            if (gameObject.name == "Largesteroid(Clone)" || gameObject.name == "Asteroid(Clone)")
+            switch (gameObject.name)
             {
-                Vector3 position = transform.position;
-                Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360f));
-                foreach (int e in new List<int>() { 0, 0 }){
-                    rotation = Quaternion.Euler(0, 0, Random.Range(0,360));
-                    Instantiate(asteroidChild, position, rotation);
-                }
+                case "Largesteroid(Clone)":
+                    spawnChildren();
+                    FindFirstObjectByType<ScoreManager>().AddScore(10);
+                    break;
+                case "Asteroid(Clone)":
+                    spawnChildren();
+                    FindFirstObjectByType<ScoreManager>().AddScore(20);
+                    break;
+                default:
+                    FindFirstObjectByType<ScoreManager>().AddScore(50);
+                    break;
             }
-            /*
-            Vector2 spawnPosition = transform.position;
-            GameObject fab = new GameObject("Asteroid(Clone)");
-            Quaternion rotation;
-            //HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA
-            foreach (int e in new List<int>() { 0, 0 })
-            {
-                rotation = Quaternion.Euler(0, 0, Random.Range(0,360));
-                Instantiate(fab, spawnPosition, rotation);
-            }
-            */
             Destroy(gameObject);
         }
     }

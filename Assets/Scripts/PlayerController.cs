@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     private static Transform flame;
     private int bulletCount;
+    private ScoreManager scoreManager;
 
     [SerializeField]
     public float speed = 3;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
         flame = transform.Find("flame");
+        scoreManager = FindFirstObjectByType<ScoreManager>();
     }
     void FixedUpdate()
     {
@@ -64,6 +66,8 @@ public class PlayerController : MonoBehaviour
 
     void Respawn()
     {
+        int score = scoreManager.score;
+        scoreManager.AddScore(-(score/5));
         transform.position = startPosition;
         rb.linearVelocity = Vector2.zero;
         isBoosting = false;
